@@ -30,7 +30,7 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
   res.send(project);
 });
 
-router.delete('/:id', [auth, admin, validateObjectId], async (req, res) => {
+router.delete('/:id', [auth, validateObjectId], async (req, res) => {
   const project = await Project.findByIdAndRemove(req.params.id);
 
   if (!project) return res.status(404).send('The project with the given ID was not found.');
