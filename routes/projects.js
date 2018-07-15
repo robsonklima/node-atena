@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
   res.send(projects);
 });
 
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -20,7 +20,7 @@ router.post('/', auth, async (req, res) => {
   res.send(project);
 });
 
-router.put('/:id', [auth, validateObjectId], async (req, res) => {
+router.put('/:id', validateObjectId, async (req, res) => {
   const { error } = validate(req.body); 
   if (error) return res.status(400).send(error.details[0].message);
   
@@ -30,7 +30,7 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
   res.send(project);
 });
 
-router.delete('/:id', [auth, validateObjectId], async (req, res) => {
+router.delete('/:id', validateObjectId, async (req, res) => {
   const project = await Project.findByIdAndRemove(req.params.id);
 
   if (!project) return res.status(404).send('The project with the given ID was not found.');
