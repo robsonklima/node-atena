@@ -11,7 +11,7 @@ router.get('/:id', async (req, res) => {
 
   if (!project) return res.status(404).send('The requirement with the given ID was not found.');
 
-  res.send(project.requirements.filter(r => { return r._id == req.params.id }));
+  res.send(project.requirements.filter(r => { return r._id == req.params.id })[0]);
 });
 
 router.post('/:id', [auth, validate(validateRequirement)], async (req, res) => {
@@ -47,11 +47,12 @@ router.put('/:id', validateObjectId, async (req, res) => {
   );
 });
 
-router.delete('/:id', [auth], async (req, res) => {
+router.delete('/:id', async (req, res) => {
   const project = await Project.findOne({ 'requirements._id': req.params.id }).select('-__v');
+  
   if (!project) return res.status(404).send('The requirement with the given ID was not found.');
 
-  project.requirements.remove(req.params.requirementId);
+  await project.requirements.remove(req.params.id);
   await project.save();
 
   res.send(project);
