@@ -20,7 +20,7 @@ function validateProject(project) {
   const schema = {
     _id: Joi.objectId(),
     name: Joi.string().min(5).max(50).required(),
-    requirements: [ requirementSchema ]
+    requirements: Joi.array().items(requirementSchema)
   };
 
   return Joi.validate(project, schema);
