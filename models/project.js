@@ -18,9 +18,7 @@ const Project = mongoose.model('Project', projectSchema);
 
 function validateProject(project) {
   const schema = {
-    _id: Joi.objectId(),
-    name: Joi.string().min(5).max(50).required(),
-    requirements: Joi.array().items(requirementSchema)
+    name: Joi.string().min(5).max(50).required()
   };
 
   return Joi.validate(project, schema);
