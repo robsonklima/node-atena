@@ -7,6 +7,10 @@ const requirementSchema = new mongoose.Schema({
     required: true,
     minlength: 1,
     maxlength: 250
+  },
+  description: {
+    type: String,
+    maxlength: 500
   }
 });
 
