@@ -55,7 +55,7 @@ router.delete('/:id', async (req, res) => {
   await project.requirements.remove(req.params.id);
   await project.save();
 
-  res.send(project.requirements.filter(r => { return r._id == req.params.id })[0]);
+  res.send();
 });
 
 module.exports = router;
