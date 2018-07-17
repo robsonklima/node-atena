@@ -6,7 +6,7 @@ const requirementSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 1,
-    maxlength: 50
+    maxlength: 250
   }
 });
 
@@ -14,7 +14,7 @@ const Requirement = mongoose.model('Requirement', requirementSchema);
 
 function validateRequirement(requirement) {
   const schema = {
-    name: Joi.string().min(1).max(50).required()
+    name: Joi.string().min(1).max(250).required()
   };
 
   return Joi.validate(requirement, schema);
