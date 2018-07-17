@@ -14,7 +14,7 @@ router.get('/:id', async (req, res) => {
   res.send(project.requirements.filter(r => { return r._id == req.params.id })[0]);
 });
 
-router.post('/:id', [auth, validate(validateRequirement)], async (req, res) => {
+router.post('/:id', async (req, res) => {
   const project = await Project.findById(req.params.id);
   if (!project) return res.status(404).send('The requirement with the given ID was not found.');
 
